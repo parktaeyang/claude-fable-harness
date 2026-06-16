@@ -1,0 +1,9 @@
+# claude-fable-harness runtime state (per-project ledgers)
+.claude-fable-harness/
+
+# Python
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store

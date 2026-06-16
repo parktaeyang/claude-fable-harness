@@ -1,0 +1,14 @@
+{
+  "name": "claude-fable-harness-marketplace",
+  "description": "Evidence-based workflow gates for Claude Code: goal ledger, findings gate, and a completion-blocking Stop hook.",
+  "owner": {
+    "name": "Taeyang Park"
+  },
+  "plugins": [
+    {
+      "name": "claude-fable-harness",
+      "source": "./",
+      "description": "Evidence-based workflow gates and a completion-blocking Stop hook for Claude Code."
+    }
+  ]
+}

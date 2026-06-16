@@ -1,0 +1,48 @@
+#!/usr/bin/env sh
+# claude-fable-harness — terminal wrapper around the goal and findings ledgers.
+set -eu
+
+SCRIPT_DIR=$(CDPATH= cd "$(dirname "$0")" && pwd)
+GOALS="$SCRIPT_DIR/../scripts/fable_goals.py"
+FINDINGS="$SCRIPT_DIR/../scripts/fable_findings.py"
+
+usage() {
+  cat <<'EOF'
+Usage:
+  claude-fable-harness status
+  claude-fable-harness goals <command> [args...]     (create | next | checkpoint | status)
+  claude-fable-harness findings <command> [args...]  (add | resolve | reject | gate | status)
+EOF
+}
+
+if [ "$#" -eq 0 ]; then
+  usage
+  exit 0
+fi
+
+case "$1" in
+  -h | --help | help)
+    usage
+    ;;
+  status)
+    python3 "$FINDINGS" status
+    if [ -f ".claude-fable-harness/goals.json" ]; then
+      python3 "$GOALS" status
+    else
+      printf '%s\n' "claude-fable-harness: no goal plan"
+    fi
+    ;;
+  findings | finding | f)
+    shift
+    exec python3 "$FINDINGS" "$@"
+    ;;
+  goals | goal | g)
+    shift
+    exec python3 "$GOALS" "$@"
+    ;;
+  *)
+    printf '%s\n' "claude-fable-harness: unknown command '$1'" >&2
+    usage >&2
+    exit 2
+    ;;
+esac
