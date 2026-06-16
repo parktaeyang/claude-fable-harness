@@ -47,6 +47,24 @@ This plugin ships with `"defaultEnabled": false`, so it installs **disabled**. E
 when you want the gates active — with the `/plugin` menu or
 `claude plugin enable claude-fable-harness`.
 
+## Uninstall / disable
+
+| Goal | Command |
+| --- | --- |
+| Disable but keep installed | `claude plugin disable claude-fable-harness` |
+| Uninstall the plugin | `claude plugin uninstall claude-fable-harness` |
+| Remove the marketplace source too | `claude plugin marketplace remove <name>` |
+
+Find the exact marketplace name with `claude plugin marketplace list`, and see what is
+installed (and at which scope) with `claude plugin list`. If you installed at a specific
+scope, uninstall from the same scope with `--scope user|project|local`.
+
+Uninstalling does **not** delete per-project runtime state. Remove the
+`.claude-fable-harness/` directory in any project to clear its ledgers.
+
+(For a local-dev session started with `claude --plugin-dir .`, nothing is installed —
+just end the session.)
+
 ## Escape hatches (no infinite loops)
 
 - `FABLE_ALLOW_STOP=1` — explicit override; never block.
