@@ -6,5 +6,6 @@
     "name": "Taeyang Park"
   },
   "license": "MIT",
+  "defaultEnabled": false,
   "keywords": ["skill", "workflow", "verification", "gates", "findings", "hooks"]
 }

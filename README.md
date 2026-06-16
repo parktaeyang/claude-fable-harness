@@ -30,6 +30,23 @@ blocks completion until findings are resolved**.
 
 Update a loaded plugin mid-session with `/reload-plugins`.
 
+## Install scope (global vs per-project)
+
+The scope is chosen by whoever installs — the plugin does not (and cannot) force it.
+
+- Installing interactively via the `/plugin` menu prompts you to pick a scope.
+- The headless `claude plugin install` command defaults to `user` (global).
+
+| Scope | Applies to | How to install |
+| --- | --- | --- |
+| `user` (default) | all your projects (global) | `claude plugin install claude-fable-harness` |
+| `project` | this repo, shared with collaborators (`.claude/settings.json`) | `claude plugin install claude-fable-harness --scope project` |
+| `local` | this repo, only you (`.claude/settings.local.json`, gitignored) | `claude plugin install claude-fable-harness --scope local` |
+
+This plugin ships with `"defaultEnabled": false`, so it installs **disabled**. Enable it
+when you want the gates active — with the `/plugin` menu or
+`claude plugin enable claude-fable-harness`.
+
 ## Escape hatches (no infinite loops)
 
 - `FABLE_ALLOW_STOP=1` — explicit override; never block.
